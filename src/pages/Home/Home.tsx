@@ -16,7 +16,7 @@ interface HomeProps {
   challengesCompleted: number;
 }
 
-export function Home({
+export default function Home({
   level,
   currentExperience,
   challengesCompleted,

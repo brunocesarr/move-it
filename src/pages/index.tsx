@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import { Home } from './Home/Home';
+import Home from './Home/Home';
 
 interface AppProps {
   level: number;

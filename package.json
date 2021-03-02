@@ -6,19 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --ext .ts,.tsx"
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
+    "lint": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
   },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged && npm run lint"
-     }
+    }
   },
   "dependencies": {
+    "js-cookie": "^2.2.1",
     "next": "10.0.7",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   },
   "devDependencies": {
+    "@types/js-cookie": "^2.2.6",
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",

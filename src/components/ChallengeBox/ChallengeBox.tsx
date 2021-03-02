@@ -1,10 +1,12 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 import { ChallengesContext } from '../../contexts/ChallengesContext';
 import { CountdownContext } from '../../contexts/CountdownContext';
-import styles from './ChallengeBox.module.css'
+import styles from './ChallengeBox.module.css';
 
-export function ChallengeBox() {
-  const { activeChallenge, resetChallenge, completeChallenge } = useContext(ChallengesContext);
+export function ChallengeBox(): JSX.Element {
+  const { activeChallenge, resetChallenge, completeChallenge } = useContext(
+    ChallengesContext,
+  );
   const { resetCountdown } = useContext(CountdownContext);
 
   function handleChallengeSucceeded(): void {
@@ -21,11 +23,11 @@ export function ChallengeBox() {
     <div className={styles.challengeBoxContainer}>
       {activeChallenge ? (
         <div className={styles.challengeActive}>
-          <header>Get { activeChallenge.amount } xp</header>
+          <header>Get {activeChallenge.amount} xp</header>
           <main>
             <img src={`icons/${activeChallenge.type}.svg`} alt="Icon" />
             <strong>New Challenge</strong>
-            <p>{ activeChallenge.description }</p>
+            <p>{activeChallenge.description}</p>
           </main>
           <footer>
             <button
@@ -54,5 +56,5 @@ export function ChallengeBox() {
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -5,9 +5,10 @@ import { Profile } from '../Profile';
 describe('ProfileComponent', () => {
   describe('Render', () => {
     beforeAll(() => {
-      global.Notification = {
+      globalThis.Notification = ({
         requestPermission: jest.fn(),
-      };
+        permission: 'granted',
+      } as unknown) as jest.Mocked<typeof Notification>;
     });
 
     afterAll(() => {

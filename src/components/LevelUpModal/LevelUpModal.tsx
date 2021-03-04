@@ -12,7 +12,11 @@ export function LevelUpModal(): JSX.Element {
         <strong>Congratulations</strong>
         <p>You have reached a new level.</p>
 
-        <button type="button" onClick={closeLevelUpModal}>
+        <button
+          type="button"
+          onClick={closeLevelUpModal}
+          aria-label="Close-Modal"
+        >
           <img src="/icons/close.svg" alt="Close Modal" />
         </button>
       </div>

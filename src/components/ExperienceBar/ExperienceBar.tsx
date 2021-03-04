@@ -19,6 +19,7 @@ export function ExperienceBar(): JSX.Element {
         <span
           className={styles.currentExperience}
           style={{ left: `${percentToNextLevel}%` }}
+          aria-label={`${currentExperience} xp`}
         >
           {currentExperience} xp
         </span>

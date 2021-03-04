@@ -53,7 +53,6 @@ export function ChallengesProvider({
   }, []);
 
   useEffect(() => {
-    console.log('Aqui', level, currentExperience, challengesCompleted);
     Cookies.set('level', String(level));
     Cookies.set('currentExperience', String(currentExperience));
     Cookies.set('challengesCompleted', String(challengesCompleted));

@@ -7,7 +7,7 @@ describe('CompleteChallengesComponent', () => {
     beforeAll(async () => {
       globalThis.Notification = ({
         requestPermission: jest.fn(),
-        permission: 'dennied',
+        permission: 'granted',
       } as unknown) as jest.Mocked<typeof Notification>;
     });
     test('Render default', () => {

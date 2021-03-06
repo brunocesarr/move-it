@@ -34,7 +34,7 @@ describe('CountdownComponent', () => {
   describe('Events', () => {
     jest.useFakeTimers();
     beforeAll(async () => {
-      globalThis.Notification = ({
+      global.Notification = ({
         requestPermission: jest.fn(),
         permission: 'dennied',
       } as unknown) as jest.Mocked<typeof Notification>;

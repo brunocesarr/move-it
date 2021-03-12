@@ -60,6 +60,10 @@ export function CountdownProvider({
       setIsActive(false);
       startNewChallenge();
     }
+
+    return function cleanup() {
+      clearTimeout(countdownTimeout);
+    };
   }, [isActive, time, startNewChallenge]);
 
   return (

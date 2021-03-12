@@ -5,11 +5,18 @@ import { CompleteChallenges } from '../CompleteChallenges';
 describe('CompleteChallengesComponent', () => {
   describe('Render', () => {
     beforeAll(async () => {
+      const originalNotification = globalThis.Notification;
+
       globalThis.Notification = ({
         requestPermission: jest.fn(),
         permission: 'granted',
+        ...originalNotification,
       } as unknown) as jest.Mocked<typeof Notification>;
     });
+    afterAll(() => {
+      jest.restoreAllMocks();
+    });
+
     test('Render default', () => {
       render(ChallengesProviderMock(<CompleteChallenges />));
 

@@ -33,17 +33,18 @@ describe('CountdownComponent', () => {
 
   describe('Events', () => {
     jest.useFakeTimers();
-    beforeAll(async () => {
-      global.Notification = ({
+    beforeAll(() => {
+      globalThis.Notification = ({
         requestPermission: jest.fn(),
         permission: 'dennied',
+        prototype: {} as Notification,
       } as unknown) as jest.Mocked<typeof Notification>;
       window.HTMLMediaElement.prototype.play = jest.fn();
     });
-    afterAll(async () => {
+    afterAll(() => {
       cleanup();
       jest.clearAllTimers();
-      jest.clearAllMocks();
+      jest.restoreAllMocks();
     });
 
     test('Simulate click event start countdown', async () => {

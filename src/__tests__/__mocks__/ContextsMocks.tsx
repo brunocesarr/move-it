@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { ChallengesProvider } from '../contexts/ChallengesContext';
-import { CountdownProvider } from '../contexts/CountdownContext';
+import { ChallengesProvider } from '../../contexts/ChallengesContext';
+import { CountdownProvider } from '../../contexts/CountdownContext';
 
 export function CountdownProviderMock(children: ReactNode): JSX.Element {
   return <CountdownProvider>{children}</CountdownProvider>;

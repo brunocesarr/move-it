@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ChallengesProviderMock } from '../../../__mocks__/ContextsMocks';
+import { ChallengesProviderMock } from '../../../__tests__/__mocks__/ContextsMocks';
 import { Profile } from '../Profile';
 
 describe('ProfileComponent', () => {
@@ -18,8 +18,8 @@ describe('ProfileComponent', () => {
     test('Render without level', async () => {
       render(ChallengesProviderMock(<Profile />));
 
-      const imgProfile = screen.getByAltText(/Bruno Cesar/i);
-      const nameProfile = screen.getByText(/Bruno César Silva/i);
+      const imgProfile = screen.getByAltText(/Undefined/i);
+      const nameProfile = screen.getByText(/Undefined/i);
       const levelProfile = screen.getByText(/Level 0/i);
 
       expect(imgProfile).toBeInTheDocument();
@@ -30,8 +30,8 @@ describe('ProfileComponent', () => {
     test('Render with level', async () => {
       render(ChallengesProviderMock(<Profile />, 2));
 
-      const imgProfile = screen.getByAltText(/Bruno Cesar/i);
-      const nameProfile = screen.getByText(/Bruno César Silva/i);
+      const imgProfile = screen.getByAltText(/Undefined/i);
+      const nameProfile = screen.getByText(/Undefined/i);
       const levelProfile = screen.getByText(/Level 2/i);
 
       expect(imgProfile).toBeInTheDocument();

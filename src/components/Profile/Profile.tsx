@@ -6,9 +6,9 @@ export function Profile(): JSX.Element {
   const { level } = useContext(ChallengesContext);
   return (
     <div className={styles.profileContainer}>
-      <img src="https://github.com/brunocesarr.png" alt="Bruno Cesar" />
+      <img src="https://www.svgrepo.com/show/5319/user.svg" alt="Undefined" />
       <div>
-        <strong>Bruno César Silva</strong>
+        <strong>Undefined</strong>
         <p>
           <img src="icons/level.svg" alt="level" />
           Level {level}

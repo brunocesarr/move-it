@@ -1,0 +1,28 @@
+{
+  "env": {
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "prettier",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "prettier"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off"
+  },
+  "globals": {
+    "React": "writable"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

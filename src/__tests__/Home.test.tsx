@@ -1,5 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { ChallengesProviderMock } from './__mocks__/ContextsMocks';
+import {
+  ChallengesProviderMock,
+  CountdownProviderMock,
+} from './__mocks__/ContextsMocks';
 import Home from '../pages/Home/Home';
 
 describe('HomePage', () => {
@@ -17,7 +20,9 @@ describe('HomePage', () => {
     test('Render default', () => {
       render(
         ChallengesProviderMock(
-          <Home level={1} currentExperience={0} challengesCompleted={0} />,
+          CountdownProviderMock(
+            <Home level={1} currentExperience={0} challengesCompleted={0} />,
+          ),
         ),
       );
 
@@ -52,23 +57,15 @@ describe('HomePage', () => {
     test('Complete success challenge', async () => {
       render(
         ChallengesProviderMock(
-          <Home level={1} currentExperience={0} challengesCompleted={0} />,
+          CountdownProviderMock(
+            <Home level={1} currentExperience={0} challengesCompleted={0} />,
+          ),
         ),
       );
       const startNewCycleButton = screen.getByText(/Start New Cycle/i);
       fireEvent.click(startNewCycleButton);
 
-      await waitFor(async () => {
-        jest.advanceTimersByTime(2500000);
-
-        expect(screen.getByText(/Challenges completed/i)).toBeInTheDocument();
-        expect(screen.getByText(/Cycle Finished/i)).toBeInTheDocument();
-        expect(screen.getByText(/New Challenge/i)).toBeInTheDocument();
-      });
-
-      fireEvent.click(startNewCycleButton);
-
-      await waitFor(async () => {
+      await waitFor(() => {
         jest.advanceTimersByTime(2500000);
 
         expect(screen.getByText(/Challenges completed/i)).toBeInTheDocument();
@@ -94,13 +91,15 @@ describe('HomePage', () => {
     test('Complete failed challenge', async () => {
       render(
         ChallengesProviderMock(
-          <Home level={1} currentExperience={0} challengesCompleted={0} />,
+          CountdownProviderMock(
+            <Home level={1} currentExperience={0} challengesCompleted={0} />,
+          ),
         ),
       );
       const startNewCycleButton = screen.getByText(/Start New Cycle/i);
       fireEvent.click(startNewCycleButton);
 
-      await waitFor(async () => {
+      await waitFor(() => {
         jest.advanceTimersByTime(2500000);
 
         expect(screen.getByText(/Challenges completed/i)).toBeInTheDocument();
@@ -108,13 +107,13 @@ describe('HomePage', () => {
         expect(screen.getByText(/New Challenge/i)).toBeInTheDocument();
       });
 
-      const succeededButton = screen.getByText(/Failed/i);
-      expect(succeededButton).toBeInTheDocument();
+      const failedButton = screen.getByText(/Failed/i);
+      expect(failedButton).toBeInTheDocument();
 
-      fireEvent.click(succeededButton);
+      fireEvent.click(failedButton);
 
       await waitFor(() => {
-        expect(screen.queryByText(/Succeeded/i)).toBeNull();
+        expect(screen.queryByText(/Failed/i)).toBeNull();
 
         expect(
           screen.getByText(/Finish a cycle to receive a challenge/i),

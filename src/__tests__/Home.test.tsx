@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { ChallengesProviderMock } from '../../../__mocks__/ContextsMocks';
-import Home from '../Home';
+import { ChallengesProviderMock } from './__mocks__/ContextsMocks';
+import Home from '../pages/Home/Home';
 
 describe('HomePage', () => {
   describe('Render', () => {
@@ -56,6 +56,16 @@ describe('HomePage', () => {
         ),
       );
       const startNewCycleButton = screen.getByText(/Start New Cycle/i);
+      fireEvent.click(startNewCycleButton);
+
+      await waitFor(async () => {
+        jest.advanceTimersByTime(2500000);
+
+        expect(screen.getByText(/Challenges completed/i)).toBeInTheDocument();
+        expect(screen.getByText(/Cycle Finished/i)).toBeInTheDocument();
+        expect(screen.getByText(/New Challenge/i)).toBeInTheDocument();
+      });
+
       fireEvent.click(startNewCycleButton);
 
       await waitFor(async () => {

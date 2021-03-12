@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { ChallengesProviderMock } from '../../../__mocks__/ContextsMocks';
+import { ChallengesProviderMock } from '../../../__tests__/__mocks__/ContextsMocks';
 import { ExperienceBar } from '../ExperienceBar';
 
 describe('ExperienceBarComponent', () => {

@@ -9,7 +9,7 @@ import {
 import {
   ChallengesProviderMock,
   CountdownProviderMock,
-} from '../../../__mocks__/ContextsMocks';
+} from '../../../__tests__/__mocks__/ContextsMocks';
 import { Countdown } from '../Countdown';
 
 describe('CountdownComponent', () => {

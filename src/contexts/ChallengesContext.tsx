@@ -1,7 +1,10 @@
-import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import challenges from '../data/challenges.json';
+import { User } from 'next-auth';
+import { signOut } from 'next-auth/client';
+import React, { createContext, ReactNode, useEffect, useState } from 'react';
+
 import { LevelUpModal } from '../components/LevelUpModal/LevelUpModal';
+import challenges from '../data/challenges.json';
 
 interface IChallenge {
   type: 'body' | 'eye';
@@ -10,6 +13,7 @@ interface IChallenge {
 }
 
 interface IChallengesProviderData {
+  profileInfo: Profile;
   level: number;
   currentExperience: number;
   challengesCompleted: number;
@@ -20,6 +24,13 @@ interface IChallengesProviderData {
   startNewChallenge: () => void;
   resetChallenge: () => void;
   completeChallenge: () => void;
+  clearSession: () => void;
+}
+
+interface Profile {
+  name: string;
+  email: string;
+  image: string;
 }
 
 interface IChallengesProviderProps {
@@ -27,6 +38,7 @@ interface IChallengesProviderProps {
   level: number;
   currentExperience: number;
   challengesCompleted: number;
+  userInfo: User;
 }
 
 export const ChallengesContext = createContext({} as IChallengesProviderData);
@@ -46,11 +58,27 @@ export function ChallengesProvider({
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
+  const [profileInfo, setProfileInfo] = useState<Profile>({
+    name: rest.userInfo.name,
+    email: rest.userInfo.email,
+    image: rest.userInfo.image,
+  });
+
   const experienceToNextLevel = ((level + 1) * 4) ** 2;
 
   useEffect(() => {
     Notification.requestPermission();
   }, []);
+
+  useEffect(() => {
+    if (rest.userInfo) {
+      setProfileInfo({
+        name: rest.userInfo.name,
+        email: rest.userInfo.email,
+        image: rest.userInfo.image,
+      });
+    }
+  }, [rest.userInfo]);
 
   useEffect(() => {
     Cookies.set('level', String(level));
@@ -105,9 +133,24 @@ export function ChallengesProvider({
     setChallengesCompleted(challengesCompleted + 1);
   };
 
+  const clearSession = (): void => {
+    setLevel(1);
+    setCurrentExperience(0);
+    setChallengesCompleted(0);
+    setActiveChallenge(null);
+
+    setProfileInfo({
+      name: null,
+      email: null,
+      image: null,
+    });
+    signOut();
+  };
+
   return (
     <ChallengesContext.Provider
       value={{
+        profileInfo,
         level,
         currentExperience,
         experienceToNextLevel,
@@ -118,6 +161,7 @@ export function ChallengesProvider({
         startNewChallenge,
         resetChallenge,
         completeChallenge,
+        clearSession,
       }}
     >
       {children}

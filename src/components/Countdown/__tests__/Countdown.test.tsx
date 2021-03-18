@@ -1,10 +1,5 @@
-import {
-  cleanup,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import {
   ChallengesProviderMock,
@@ -54,7 +49,7 @@ describe('CountdownComponent', () => {
 
       expect(startCountdownButton).toBeInTheDocument();
 
-      fireEvent.click(startCountdownButton);
+      userEvent.click(startCountdownButton);
 
       await waitFor(() => {
         jest.advanceTimersByTime(1000);
@@ -81,7 +76,7 @@ describe('CountdownComponent', () => {
 
       expect(startCountdownButton).toBeInTheDocument();
 
-      fireEvent.click(startCountdownButton);
+      userEvent.click(startCountdownButton);
 
       await waitFor(() => {
         jest.advanceTimersByTime(50000);
@@ -101,7 +96,7 @@ describe('CountdownComponent', () => {
       const quitCountdownButton = screen.getByText(/Quit Cycle/i);
       expect(quitCountdownButton).toBeInTheDocument();
 
-      fireEvent.click(quitCountdownButton);
+      userEvent.click(quitCountdownButton);
 
       await waitFor(() => {
         expect(screen.queryByText(/Quit Cycle/i)).toBeNull();
@@ -115,7 +110,7 @@ describe('CountdownComponent', () => {
 
       expect(startCountdownButton).toBeInTheDocument();
 
-      fireEvent.click(startCountdownButton);
+      userEvent.click(startCountdownButton);
 
       await waitFor(async () => {
         jest.advanceTimersByTime(2500000);

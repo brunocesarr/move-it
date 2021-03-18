@@ -20,7 +20,7 @@ describe('ExperienceBarComponent', () => {
       render(ChallengesProviderMock(<ExperienceBar />));
 
       const currentExperienceElement = screen.getByLabelText(/0 xp/i);
-      const experienceToNextLevelElement = screen.getByText(/16 xp/i);
+      const experienceToNextLevelElement = screen.getByText(/64 xp/i);
 
       expect(currentExperienceElement).toBeInTheDocument();
       expect(currentExperienceElement).toHaveStyle('left: 0%');

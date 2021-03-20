@@ -1,4 +1,5 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { ChallengesProviderMock } from '../../../__tests__/__mocks__/ContextsMocks';
 import { LevelUpModal } from '../LevelUpModal';
@@ -23,7 +24,7 @@ describe('LevelUpModalComponent', () => {
       const newLevelMessageText = screen.getByText(
         /You have reached a new level/i,
       );
-      const newLevelText = screen.getByText(/0/i);
+      const newLevelText = screen.getByText(/1/i);
       const closeModalButton = screen.getByAltText(/Close Modal/i);
 
       expect(congratulationsText).toBeInTheDocument();
@@ -68,7 +69,7 @@ describe('LevelUpModalComponent', () => {
       const newLevelMessageText = screen.getByText(
         /You have reached a new level/i,
       );
-      const newLevelText = screen.getByText(/0/i);
+      const newLevelText = screen.getByText(/1/i);
       const closeModalButton = screen.getByAltText(/Close Modal/i);
 
       expect(congratulationsText).toBeInTheDocument();
@@ -76,7 +77,7 @@ describe('LevelUpModalComponent', () => {
       expect(newLevelText).toBeInTheDocument();
       expect(closeModalButton).toBeInTheDocument();
 
-      fireEvent.click(closeModalButton);
+      userEvent.click(closeModalButton);
 
       waitFor(() => {
         expect(congratulationsText).not.toBeInTheDocument();

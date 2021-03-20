@@ -5,6 +5,7 @@ import React, { createContext, ReactNode, useEffect, useState } from 'react';
 
 import { LevelUpModal } from '../components/LevelUpModal/LevelUpModal';
 import challenges from '../data/challenges.json';
+import Login from '../pages/Login';
 
 interface IChallenge {
   type: 'body' | 'eye';
@@ -58,11 +59,15 @@ export function ChallengesProvider({
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
-  const [profileInfo, setProfileInfo] = useState<Profile>({
-    name: rest.userInfo.name,
-    email: rest.userInfo.email,
-    image: rest.userInfo.image,
-  });
+  const [profileInfo, setProfileInfo] = useState<Profile>(
+    rest.userInfo
+      ? {
+          name: rest.userInfo.name,
+          email: rest.userInfo.email,
+          image: rest.userInfo.image,
+        }
+      : null,
+  );
 
   const experienceToNextLevel = ((level + 1) * 4) ** 2;
 
@@ -139,13 +144,11 @@ export function ChallengesProvider({
     setChallengesCompleted(0);
     setActiveChallenge(null);
 
-    setProfileInfo({
-      name: null,
-      email: null,
-      image: null,
-    });
+    setProfileInfo(null);
     signOut();
   };
+
+  if (!profileInfo) return <Login />;
 
   return (
     <ChallengesContext.Provider

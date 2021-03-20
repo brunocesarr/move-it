@@ -16,13 +16,9 @@ export default function App({
   currentExperience,
   challengesCompleted,
 }: AppProps): JSX.Element {
-  const [session, loading] = useSession();
+  const [session] = useSession();
 
-  if (typeof window !== 'undefined' && loading) return null;
-
-  if (!session) {
-    return <Login />;
-  }
+  if (!session) return <Login />;
 
   return (
     <Home

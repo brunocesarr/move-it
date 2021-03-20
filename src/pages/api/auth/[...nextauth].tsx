@@ -5,7 +5,7 @@ import Providers from 'next-auth/providers';
 export default (
   request: NextApiRequest,
   response: NextApiResponse,
-): Promise<void> =>
+): void | Promise<void> =>
   NextAuth(request, response, {
     providers: [
       Providers.GitHub({
